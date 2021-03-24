@@ -58,17 +58,7 @@ function bestGroup() {
       });
     }
   }
-  groupSort(formattedGroupList);
-}
-
-// 組別排序
-function groupSort(formattedGroupList) {
-  if (groupSortMethod.value === "totalSubmit") {
-    formattedGroupList.sort((a, b) => b.submitTotal - a.submitTotal);
-  } else {
-    formattedGroupList.sort((a, b) => a.averageSec - b.averageSec);
-  }
-  groupRender(formattedGroupList);
+  groupSort();
 }
 
 // 個人資料：抓取全部需要用到的資料，並組成一個個物件放到formattedIndividualList裏
@@ -80,6 +70,16 @@ function bestIndividual() {
     unix: formatSubmitDate(item.timestamp),
   }));
   individualSort();
+}
+
+// 組別排序
+function groupSort() {
+  if (groupSortMethod.value === "totalSubmit") {
+    formattedGroupList.sort((a, b) => b.submitTotal - a.submitTotal);
+  } else {
+    formattedGroupList.sort((a, b) => a.averageSec - b.averageSec);
+  }
+  groupRender(formattedGroupList);
 }
 
 // 個人排序
