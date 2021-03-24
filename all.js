@@ -63,13 +63,12 @@ function bestGroup() {
 
 // 組別排序
 function groupSort(formattedGroupList) {
-  let sortList = [];
   if (groupSortMethod.value === "totalSubmit") {
-    sortList = formattedGroupList.sort((a, b) => b.submitTotal - a.submitTotal);
+    formattedGroupList.sort((a, b) => b.submitTotal - a.submitTotal);
   } else {
-    sortList = formattedGroupList.sort((a, b) => a.averageSec - b.averageSec);
+    formattedGroupList.sort((a, b) => a.averageSec - b.averageSec);
   }
-  groupRender(sortList);
+  groupRender(formattedGroupList);
 }
 
 // 個人資料：抓取全部需要用到的資料，並組成一個個物件放到formattedIndividualList裏
@@ -85,15 +84,14 @@ function bestIndividual() {
 
 // 個人排序
 function individualSort() {
-  let sortList = [];
   if (individualSortMethod.value === "submitTime") {
-    sortList = formattedIndividualList.sort((a, b) => a.unix - b.unix);
+    formattedIndividualList.sort((a, b) => a.unix - b.unix);
   } else {
-    sortList = formattedIndividualList.sort(
+    formattedIndividualList.sort(
       (a, b) => a.practiceTotalSec - b.practiceTotalSec
     );
   }
-  individualRender(sortList);
+  individualRender(formattedIndividualList);
 }
 
 // 個人資料裏的timestamp轉換（用作之後計算投稿時間排名）
