@@ -46,7 +46,7 @@ function bestGroup() {
 
   const averageSec = {};
   for (const [group, sec] of Object.entries(totalSec)) {
-    averageSec[group] = Math.floor(sec / allGroupInfo[group]);
+    averageSec[group] = sec / allGroupInfo[group];
   }
 
   for (const [group, submitTotal] of Object.entries(allGroupInfo)) {
@@ -132,12 +132,13 @@ function formatSubmitDate(timestamp) {
 
 // 渲染組別排名
 function groupRender(list) {
+  // 在最後渲染資料時才進行Math.floor，不要在sort時進行，以免出現取最小整數後有數值相同的情況
   template = (item, index) => `
     <tr>
         <td>${index + 1}</th>
         <td>${item.group}</td>
         <td>${item.submitTotal}</td>
-        <td>${item.averageSec}</td>
+        <td>${Math.floor(item.averageSec)}</td> 
     </tr>`;
   const HTMLcontent = list.reduce((acc, curr, index) => {
     return (acc += template(curr, index));
